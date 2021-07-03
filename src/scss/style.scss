@@ -1,0 +1,36 @@
+@import './libs/normalize';
+@import './libs/fonts';
+@import './base/templates';
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: AvenirNextCyr;
+  position: relative;
+}
+
+.wrap {
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+input {
+  border-radius: unset;
+}
+
+@import './blocks/header';
+@import './blocks/promo';
+@import './blocks/reasons';
+@import './blocks/price';
+@import './blocks/stats';
+@import './blocks/type';
+@import './blocks/feedback';
+@import './blocks/question';
+@import './blocks/text';
+@import './blocks/footer';
+@import './blocks/modal';
+@import './blocks/media';

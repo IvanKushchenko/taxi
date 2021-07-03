@@ -1,0 +1,122 @@
+@import './variables';
+
+.btn {
+  cursor: pointer;
+  width: 255px;
+  height: 50px;
+  background: $main-color;
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+  transition: all 0.3s;
+
+  &:hover,
+  &:focus {
+    border: 1px solid $main-color;
+    color: $main-color;
+    background-color: #fff;
+    transition: all 0.3s;
+  }
+  &_transparent {
+    border: 3px solid #ffffff;
+    background: transparent;
+    border-radius: 100px;
+    svg {
+      path {
+        transition: all 0.3s;
+      }
+    }
+    &:hover,
+    &:focus {
+      color: #7371df;
+      border: 3px solid #7371df;
+      svg {
+        path {
+          fill: #7371df;
+        }
+      }
+    }
+  }
+}
+
+.title {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 49px;
+  text-align: center;
+  color: #393939;
+  &_fz50 {
+    font-size: 50px;
+    line-height: 61px;
+  }
+  &_white {
+    color: #ffffff;
+  }
+}
+
+.subtitle {
+  display: block;
+  margin: 0 auto;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  color: #797979;
+  &_white {
+    color: #ffffff;
+  }
+}
+.ellipse {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(86, 84, 228, 0.3);
+  border-radius: 100%;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: #5654e4;
+    box-shadow: 0px 0px 20px rgba(86, 84, 228, 0.3);
+    border-radius: 100%;
+  }
+}
+
+@media (max-width: 992px) {
+  .title {
+    font-size: 35px;
+    line-height: 41px;
+  }
+  .subtitle {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 30px;
+    line-height: 36px;
+  }
+}
+
+@media (max-width: 576px) {
+  .title {
+    font-size: 25px;
+    line-height: 31px;
+  }
+  .subtitle {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}

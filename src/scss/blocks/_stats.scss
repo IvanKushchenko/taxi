@@ -1,0 +1,29 @@
+.stats {
+  padding: 70px 0;
+  background: url(../images/info-bg.jpg) center (center/cover) no-repeat;
+  .wrap {
+    max-width: 1150px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__item {
+    &-header {
+      font-weight: 700;
+      font-size: 70px;
+      line-height: 86px;
+      color: #ffffff;
+      text-align: center;
+    }
+    &-subheader {
+      margin-top: 4px;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      text-align: center;
+      color: #ffffff;
+    }
+  }
+}

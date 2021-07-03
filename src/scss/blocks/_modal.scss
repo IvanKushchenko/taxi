@@ -1,0 +1,113 @@
+.modal {
+  padding: 20px 10px;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 20;
+  height: 100%;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  &.opened-modal {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: all;
+    transition: all 0.3s;
+    .modal__wrapper {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: all;
+      transition: all 0.3s;
+    }
+    .overlay {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: all;
+      transition: all 0.3s;
+    }
+  }
+  &__wrapper {
+    margin: auto;
+    background: #7371df;
+    border-radius: 10px;
+    z-index: 20;
+    padding: 53px 30px;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+    &-success {
+      padding: 58px 13px;
+    }
+  }
+  &__title {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: #ffffff;
+  }
+  &__subtitle {
+    margin: 8px 0 19px 0;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #ffffff;
+  }
+  &__form {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+  &__input {
+    margin-bottom: 20px;
+    width: 300px;
+    height: 50px;
+    input {
+      padding: 15px 15px 15px 30px;
+      border: none;
+      outline: none;
+      width: 100%;
+      height: 100%;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 17px;
+      color: #797979;
+      transition: all 0.1s;
+      &:focus,
+      &:hover {
+        outline: 3px solid lighten($color: #7371df, $amount: 30%);
+        transition: all 0.1s;
+      }
+    }
+  }
+  .btn {
+    width: 100%;
+    svg {
+      margin-left: 10px;
+    }
+  }
+  &__img {
+    img {
+      width: 100%;
+      max-width: 400px;
+    }
+  }
+}
+
+.overlay {
+  background-color: rgba(49, 57, 60, 0.65);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  height: 100%;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+}

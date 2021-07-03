@@ -1,0 +1,112 @@
+.feedback {
+  padding: 60px 0;
+  background: url(../images/feedback/feedback-bg.jpg) center (center/cover) no-repeat;
+  .wrap {
+    max-width: 1150px;
+  }
+  &__wrapper {
+    position: relative;
+    margin-top: 60px;
+    width: 100%;
+    height: 100%;
+  }
+  &__item {
+    position: relative;
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    width: 350px;
+    min-height: 270px;
+    &-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      span {
+        margin-left: 8px;
+        font-style: italic;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        color: #5654e4;
+      }
+    }
+    &-subheader {
+      margin-top: 11px;
+      font-weight: 450;
+      font-size: 14px;
+      line-height: 17px;
+      text-align: center;
+      color: #797979;
+    }
+  }
+  &__counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #ffffff;
+    .swiper-pagination-current {
+      margin-right: 5px;
+    }
+    .swiper-pagination-total {
+      margin-left: 5px;
+      color: #5654e4;
+    }
+  }
+  .swiper-container {
+    width: 750px;
+  }
+  .swiper-button-prev,
+  .swiper-container-rtl .swiper-button-next {
+    left: 100px;
+    &:hover,
+    &:focus {
+      outline: none;
+      &::after {
+        border-color: transparent #5654e4 transparent transparent;
+        transition: all 0.3s;
+      }
+    }
+  }
+  .swiper-button-next,
+  .swiper-container-rtl .swiper-button-prev {
+    right: 100px;
+    &:hover,
+    &:focus {
+      outline: none;
+      &::after {
+        border-color: transparent transparent transparent #5654e4;
+        transition: all 0.3s;
+      }
+    }
+  }
+  .swiper-button-prev:after,
+  .swiper-container-rtl .swiper-button-next:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 12px 14px 12px 0;
+    border-color: transparent #797979 transparent transparent;
+    transition: all 0.3s;
+  }
+  .swiper-button-next:after,
+  .swiper-container-rtl .swiper-button-prev:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 12px 0 12px 14px;
+    border-color: transparent transparent transparent #797979;
+    transition: all 0.3s;
+  }
+}

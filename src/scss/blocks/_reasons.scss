@@ -1,0 +1,65 @@
+@import '../base/variables';
+
+.reasons {
+  padding: 60px 0 0px 0;
+  .wrap {
+    max-width: 1440px;
+  }
+  &__wrapper {
+    margin-top: 65px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    &-header {
+      display: flex;
+      align-items: center;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 22px;
+      color: $main-color;
+      span {
+        margin-left: 10px;
+      }
+    }
+    &-subheader {
+      max-width: 415px;
+      margin-top: 10px;
+      font-style: normal;
+      font-weight: 450;
+      font-size: 14px;
+      line-height: 17px;
+      color: #797979;
+      p {
+        &:nth-child(2) {
+          margin-top: 20px;
+        }
+      }
+    }
+    &-item {
+      margin-bottom: 30px;
+      &:nth-child(1),
+      &:nth-child(4) {
+        margin-left: 65px;
+      }
+    }
+  }
+  &__img {
+    height: 600px;
+    background: radial-gradient(
+      42.27% 50% at 50% 50%,
+      rgba(86, 84, 228, 0.304) 0%,
+      rgba(86, 84, 228, 0) 100%
+    );
+  }
+  &__points {
+    position: absolute;
+    top: 0;
+    left: 35%;
+  }
+}

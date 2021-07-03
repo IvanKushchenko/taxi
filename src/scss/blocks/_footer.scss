@@ -1,0 +1,61 @@
+@import '../base/variables';
+@import '../base/mixins';
+
+.footer {
+  background: #2c2c2c;
+  padding: 39px 0 47px 0;
+  .wrap {
+    max-width: 1330px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__left {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #ffffff;
+    p {
+      margin-top: 8px;
+    }
+    a {
+      @include logoMenu;
+    }
+  }
+  &__nav {
+    @include navMenu;
+    ul {
+      a {
+        display: block;
+        color: #ffffff;
+      }
+    }
+  }
+  &__right {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #ffffff;
+    span,
+    a {
+      font-weight: 600;
+    }
+    a {
+      text-decoration: none;
+      color: #ffffff;
+      &:hover,
+      &:focus {
+        text-decoration-line: underline;
+        color: $main-color;
+        outline: none;
+        transition: all 0.3s;
+      }
+    }
+    div {
+      margin-top: 15px;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+}

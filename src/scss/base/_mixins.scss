@@ -1,0 +1,36 @@
+@mixin logoMenu {
+  display: block;
+  transition: all 0.3s;
+  &:hover,
+  &:focus {
+    opacity: 0.6;
+    outline: none;
+    transition: all 0.3s;
+  }
+}
+
+@mixin navMenu {
+  flex: 0 0 550px;
+  ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    a {
+      color: #2c2c2c;
+      text-decoration: none;
+      transition: all 0.3s;
+      &:hover,
+      &:focus {
+        text-decoration-line: underline;
+        color: $main-color;
+        outline: none;
+        transition: all 0.3s;
+      }
+    }
+  }
+}
