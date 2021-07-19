@@ -1,5 +1,9 @@
 'use strict';
+const jQuery = require('jquery');
+const date = require('jquery-datetimepicker');
+const select = require('select2');
 
+import Inputmask from 'inputmask';
 import './scss/style.scss';
 
 import OverlayScrollbars from 'overlayscrollbars';
@@ -7,8 +11,6 @@ import 'overlayscrollbars/css/OverlayScrollbars.min.css';
 
 import Swiper from 'swiper/bundle';
 import 'swiper/swiper-bundle.css';
-
-// import './select2.min';
 
 window.addEventListener('DOMContentLoaded', () => {
   // Checking for scroll width
@@ -121,6 +123,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Close menu, modal on escape
   document.addEventListener('keydown', (e) => {
     if (e.code === 'Escape') {
       headerBlock.classList.remove('opened-menu');
@@ -131,15 +134,24 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Phone mask
+  const phoneInputs = document.querySelectorAll('input[type="tel"]');
+  const phoneMask = new Inputmask({ mask: '+7(999)-999-99-99' });
+  phoneInputs.forEach((input) => {
+    phoneMask.mask(input);
+  });
+
+  // Order select
   jQuery('[data-type="order-select"]').select2();
-  jQuery('input[type="tel"]').mask('+7(999)-999-99-99');
+
+  // Datepicker
   jQuery.datetimepicker.setLocale('ru');
   jQuery('#date').datetimepicker({
     format: 'd.m.Y',
   });
 
+  // Order btn
   const orderBtn = document.querySelector('[data-type="order-btn"]');
-
   orderBtn.addEventListener('click', (e) => {
     e.preventDefault();
     document.body.append(div);
