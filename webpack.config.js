@@ -98,6 +98,7 @@ const config = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src/index.html'),
       filename: 'index.html',
+      inject: 'body',
     }),
     new MiniCssExtractPlugin({
       filename: 'style.[contenthash].css',
@@ -113,11 +114,9 @@ const config = {
     }),
   ],
   devServer: {
-    // contentBase: path.join(__dirname, 'src'),
-    contentBase: path.resolve(__dirname, 'dist'),
+    contentBase: path.join(__dirname, 'src'),
     compress: true,
-    port: 3300,
-    host: '0.0.0.0',
+    port: 3000,
     open: true,
   },
 };

@@ -1,5 +1,6 @@
 @import './libs/normalize';
 @import './libs/fonts';
+@import './libs/jquery.datetimepicker.min';
 @import './base/templates';
 * {
   margin: 0;
@@ -22,6 +23,12 @@ input {
   border-radius: unset;
 }
 
+.scroll-checker {
+  overflow-y: scroll;
+  width: 50px;
+  height: 50px;
+}
+
 @import './blocks/header';
 @import './blocks/promo';
 @import './blocks/reasons';
@@ -33,4 +40,5 @@ input {
 @import './blocks/text';
 @import './blocks/footer';
 @import './blocks/modal';
+@import './blocks/order';
 @import './blocks/media';

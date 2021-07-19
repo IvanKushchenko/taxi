@@ -8,7 +8,14 @@ import 'overlayscrollbars/css/OverlayScrollbars.min.css';
 import Swiper from 'swiper/bundle';
 import 'swiper/swiper-bundle.css';
 
+// import './select2.min';
+
 window.addEventListener('DOMContentLoaded', () => {
+  // Checking for scroll width
+  const div = document.createElement('div');
+  div.classList.add('scroll-checker');
+  let scrollWidth = null;
+
   // Custom ScrollBar
   const tableScroll = OverlayScrollbars(document.querySelector('[data-type="table-with-scroll"]'), {
     className: 'os-theme-dark',
@@ -60,15 +67,21 @@ window.addEventListener('DOMContentLoaded', () => {
     if (headerBlock.classList.contains('opened-menu')) {
       headerBlock.classList.remove('opened-menu');
       document.body.style.overflow = '';
+      document.body.style.marginRight = ``;
     } else {
       headerBlock.classList.add('opened-menu');
       document.body.style.overflow = 'hidden';
+      document.body.append(div);
+      scrollWidth = div.offsetWidth - div.clientWidth;
+      div.remove();
+      document.body.style.marginRight = `${scrollWidth}px`;
     }
   });
   headerLinks.forEach((link) => {
     link.addEventListener('click', () => {
       headerBlock.classList.remove('opened-menu');
       document.body.style.overflow = '';
+      document.body.style.marginRight = ``;
     });
   });
 
@@ -91,6 +104,10 @@ window.addEventListener('DOMContentLoaded', () => {
       defaultModal.classList.add('opened-modal');
       headerBlock.classList.remove('opened-menu');
       document.body.style.overflow = 'hidden';
+      document.body.append(div);
+      scrollWidth = div.offsetWidth - div.clientWidth;
+      div.remove();
+      document.body.style.marginRight = `${scrollWidth}px`;
     });
   });
 
@@ -98,7 +115,8 @@ window.addEventListener('DOMContentLoaded', () => {
     modal.addEventListener('click', (e) => {
       if (e.target && e.target.classList.contains('overlay')) {
         modal.classList.remove('opened-modal');
-        document.body.style.overflow = 'auto';
+        document.body.style.overflow = '';
+        document.body.style.marginRight = ``;
       }
     });
   });
@@ -109,6 +127,26 @@ window.addEventListener('DOMContentLoaded', () => {
       defaultModal.classList.remove('opened-modal');
       successModal.classList.remove('opened-modal');
       document.body.style.overflow = '';
+      document.body.style.marginRight = ``;
     }
+  });
+
+  jQuery('[data-type="order-select"]').select2();
+  jQuery('input[type="tel"]').mask('+7(999)-999-99-99');
+  jQuery.datetimepicker.setLocale('ru');
+  jQuery('#date').datetimepicker({
+    format: 'd.m.Y',
+  });
+
+  const orderBtn = document.querySelector('[data-type="order-btn"]');
+
+  orderBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.body.append(div);
+    scrollWidth = div.offsetWidth - div.clientWidth;
+    div.remove();
+    document.body.style.marginRight = `${scrollWidth}px`;
+    document.body.style.overflow = 'hidden';
+    successModal.classList.add('opened-modal');
   });
 });

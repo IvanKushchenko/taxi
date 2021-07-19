@@ -6,28 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
     <title>Project</title>
-	<!-- Marquiz script start -->
-	<script>
-	(function(w, d, s, o){
-	  var j = d.createElement(s); j.async = true; j.src = '//script.marquiz.ru/v2.js';j.onload = function() {
-	    if (document.readyState !== 'loading') Marquiz.init(o);
-	    else document.addEventListener("DOMContentLoaded", function() {
-	      Marquiz.init(o);
-	    });
-	  };
-	  d.head.insertBefore(j, d.head.firstElementChild);
-	})(window, document, 'script', {
-	    host: '//quiz.marquiz.ru',
-	    region: 'eu',
-	    id: '6094ee30d52f5a0049981af5',
-	    autoOpen: false,
-	    autoOpenFreq: 'once',
-	    openOnExit: false,
-	    disableOnMobile: false
-	  }
-	);
-	</script>
-	<!-- Marquiz script end -->
+
     <meta name="description" content="This is page description" />
     <meta property="og:title" content="This is title" />
     <meta property="og:description" content="This is another page description" />
@@ -42,10 +21,13 @@
     <!-- Favicon
     <link rel="icon" href="">
     <link rel="apple-touch-icon" href=""> -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header class="header" data-type="header">
-		
       <div class="wrap">
         <a href="/" class="header__logo">
           <svg
@@ -68,7 +50,6 @@
             <line x1="8.74228e-08" y1="28" x2="35" y2="28" stroke="#5654E4" stroke-width="2" />
           </svg>
         </a>
-
         <nav class="header__nav">
           <ul>
             <li>
@@ -144,8 +125,66 @@
         <h1>Официальное такси аэропорта Симферополь</h1>
       </div>
     </section>
-    <div data-marquiz-id="6094ee30d52f5a0049981af5"></div>
-		<script>(function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Inline', {id: '6094ee30d52f5a0049981af5', buttonText: 'Пройти тест', bgColor: '#5654e4', textColor: '#ffffff'})</script>
+    <section class="order">
+      <div class="wrap">
+        <h2 class="order__title">Заказать такси</h2>
+        <div class="order__subtitle">
+          Заполните форму и получите точный рассчет стоимости вашей поездки
+        </div>
+        <form action="#" class="order__form">
+          <div class="order__input">
+            <input type="text" name="name" required="" placeholder="Имя*" />
+          </div>
+          <div class="order__input">
+            <input type="tel" inputmode="tel" name="phone" required="" placeholder="Телефон*" />
+          </div>
+          <div class="order__input">
+            <select name="from" data-type="order-select">
+              <option value="Откуда" selected disabled>Откуда</option>
+              <option value="Алупка">Алупка</option>
+              <option value="Алушта">Алушта</option>
+              <option value="Симферополь ">Симферополь</option>
+            </select>
+          </div>
+          <div class="order__input">
+            <select name="where" data-type="order-select">
+              <option value="Куда" selected disabled>Куда</option>
+              <option value="Артек">Артек</option>
+              <option value="Бахчисарай">Бахчисарай</option>
+              <option value="Байдарские ворота ">Байдарские ворота</option>
+            </select>
+          </div>
+          <div class="order__input">
+            <select name="type" data-type="order-select">
+              <option value="Выберите класс такси" selected disabled>Выберите класс такси</option>
+              <option value="Стандарт">Стандарт</option>
+              <option value="Комфорт+">Комфорт+</option>
+              <option value="Бизнес">Бизнес</option>
+              <option value="Минивэн">Минивэн</option>
+            </select>
+          </div>
+          <div class="order__input">
+            <input type="text" name="date" id="date" placeholder="Дата и время*" />
+          </div>
+          <button class="btn btn_transparent" data-type="order-btn">
+            <span>Заказать такси</span>
+            <svg
+              width="16"
+              height="14"
+              viewBox="0 0 16 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M14.25 7C14.7344 7 15.1458 7.17187 15.4844 7.51562C15.8281 7.85417 16 8.26562 16 8.75V11.75C16 11.8229 15.9766 11.8828 15.9297 11.9297C15.8828 11.9766 15.8229 12 15.75 12H15V12.5C15 12.9167 14.8542 13.2708 14.5625 13.5625C14.2708 13.8542 13.9167 14 13.5 14C13.0833 14 12.7292 13.8542 12.4375 13.5625C12.1458 13.2708 12 12.9167 12 12.5V12H4V12.5C4 12.9167 3.85417 13.2708 3.5625 13.5625C3.27083 13.8542 2.91667 14 2.5 14C2.08333 14 1.72917 13.8542 1.4375 13.5625C1.14583 13.2708 1 12.9167 1 12.5V12H0.25C0.177083 12 0.117188 11.9766 0.0703125 11.9297C0.0234375 11.8828 0 11.8229 0 11.75V8.75C0 8.26562 0.169271 7.85417 0.507813 7.51562C0.851563 7.17187 1.26563 7 1.75 7H1.96875L2.78906 3.72656C2.90885 3.23698 3.17969 2.82812 3.60156 2.5C4.02344 2.16667 4.48958 2 5 2H6V0.25C6 0.177083 6.02344 0.117187 6.07031 0.0703119C6.11719 0.0234367 6.17708 -9.53674e-07 6.25 -9.53674e-07H9.75C9.82292 -9.53674e-07 9.88281 0.0234367 9.92969 0.0703119C9.97656 0.117187 10 0.177083 10 0.25V2H11C11.5104 2 11.9766 2.16667 12.3984 2.5C12.8203 2.82812 13.0911 3.23698 13.2109 3.72656L14.0313 7H14.25ZM1.61719 10.3828C1.86198 10.6276 2.15625 10.75 2.5 10.75C2.84375 10.75 3.13802 10.6276 3.38281 10.3828C3.6276 10.138 3.75 9.84375 3.75 9.5C3.75 9.15625 3.6276 8.86198 3.38281 8.61719C3.13802 8.3724 2.84375 8.25 2.5 8.25C2.15625 8.25 1.86198 8.3724 1.61719 8.61719C1.3724 8.86198 1.25 9.15625 1.25 9.5C1.25 9.84375 1.3724 10.138 1.61719 10.3828ZM4.03125 7H11.9688L11.2734 4.21094C11.263 4.16927 11.2266 4.125 11.1641 4.07812C11.1016 4.02604 11.0469 4 11 4H5C4.95313 4 4.89844 4.02604 4.83594 4.07812C4.77344 4.125 4.73698 4.16927 4.72656 4.21094L4.03125 7ZM12.6172 10.3828C12.862 10.6276 13.1563 10.75 13.5 10.75C13.8438 10.75 14.138 10.6276 14.3828 10.3828C14.6276 10.138 14.75 9.84375 14.75 9.5C14.75 9.15625 14.6276 8.86198 14.3828 8.61719C14.138 8.3724 13.8438 8.25 13.5 8.25C13.1563 8.25 12.862 8.3724 12.6172 8.61719C12.3724 8.86198 12.25 9.15625 12.25 9.5C12.25 9.84375 12.3724 10.138 12.6172 10.3828Z"
+                fill="white"
+              ></path>
+            </svg>
+          </button>
+          <div class="order__form-required">* - поле для обязательного заполнения</div>
+        </form>
+      </div>
+    </section>
     <section class="reasons" id="reasons">
       <div class="wrap">
         <h2 class="title title_fz50">
@@ -735,5 +774,13 @@
         </div>
       </div>
     </section>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="./jquery.datetimepicker.full.min.js"></script>
   </body>
 </html>
