@@ -142,7 +142,16 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   // Order select
-  jQuery('[data-type="order-select"]').select2();
+  jQuery('[data-type="order-select"]').select2({
+  	ajax: {
+  		type: 'GET',
+  		crossDomain: true,
+  		dataType: 'json',
+  		url(par){
+  			return `https://vl-taxi.ru/cities?city=${par.term}`
+  		}
+  	}
+  });
 
   // Datepicker
   jQuery.datetimepicker.setLocale('ru');

@@ -116,7 +116,8 @@ const config = {
   devServer: {
     contentBase: path.join(__dirname, 'src'),
     compress: true,
-    port: 3000,
+    port: 3300,
+    host: '0.0.0.0',
     open: true,
   },
 };
