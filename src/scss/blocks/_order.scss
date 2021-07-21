@@ -81,7 +81,7 @@
         border: none;
         border-radius: unset;
       }
-      .select2-selection__rendered {
+      .select2-selection--single .select2-selection__rendered {
         padding: 15.5px 30px;
         font-family: OpenSans;
         font-style: normal;
@@ -90,7 +90,7 @@
         line-height: 19px;
         color: #797979;
       }
-      .select2-selection__arrow {
+      .select2-selection--single .select2-selection__arrow {
         top: 50%;
         transform: translateY(-50%);
       }

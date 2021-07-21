@@ -25,6 +25,7 @@ const config = {
               [
                 '@babel/preset-env',
                 {
+                  corejs: 3,
                   useBuiltIns: 'usage',
                   targets: 'last 5 versions',
                 },
@@ -107,17 +108,20 @@ const config = {
     new ImageMinimizerPlugin({
       minimizerOptions: {
         plugins: [
-          ['jpegtran', { progressive: true }],
+          // ['jpegtran', { progressive: true }],
           ['optipng', { optimizationLevel: 5 }],
         ],
       },
+    }),
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery/dist/jquery.min.js',
+      'window.jQuery': 'jquery/dist/jquery.min.js',
     }),
   ],
   devServer: {
     contentBase: path.join(__dirname, 'src'),
     compress: true,
-    port: 3300,
-    host: '0.0.0.0',
+    port: 3000,
     open: true,
   },
 };

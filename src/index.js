@@ -1,16 +1,22 @@
 'use strict';
+
 const jQuery = require('jquery');
+
 const date = require('jquery-datetimepicker');
+import 'jquery-datetimepicker/build/jquery.datetimepicker.min.css';
+
 const select = require('select2');
+import 'select2/dist/css/select2.min.css';
 
 import Inputmask from 'inputmask';
-import './scss/style.scss';
 
 import OverlayScrollbars from 'overlayscrollbars';
 import 'overlayscrollbars/css/OverlayScrollbars.min.css';
 
 import Swiper from 'swiper/bundle';
 import 'swiper/swiper-bundle.css';
+
+import './scss/style.scss';
 
 window.addEventListener('DOMContentLoaded', () => {
   // Checking for scroll width
@@ -93,14 +99,6 @@ window.addEventListener('DOMContentLoaded', () => {
   const defaultModal = document.querySelector('[data-type="modal-default"]');
   const successModal = document.querySelector('[data-type="modal-success"]');
 
-  // For checking modal success
-  const defaultModalBtn = defaultModal.querySelector('button');
-  defaultModalBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    defaultModal.classList.remove('opened-modal');
-    successModal.classList.add('opened-modal');
-  });
-
   modalBtn.forEach((btn) => {
     btn.addEventListener('click', (e) => {
       defaultModal.classList.add('opened-modal');
@@ -141,33 +139,232 @@ window.addEventListener('DOMContentLoaded', () => {
     phoneMask.mask(input);
   });
 
-  // Order select
-  jQuery('[data-type="order-select"]').select2({
-  	ajax: {
-  		type: 'GET',
-  		crossDomain: true,
-  		dataType: 'json',
-  		url(par){
-  			return `https://vl-taxi.ru/cities?city=${par.term}`
-  		}
-  	}
+  // Type select
+  const typeSelectWrap = jQuery('[data-type="type-select"]');
+  const typeSelect = jQuery('[data-type="type-select"] select').select2();
+
+  // City select
+  const fromCityWrap = jQuery('[data-type="city-from"]');
+  const fromCity = jQuery("[data-type='city-from'] select").select2({
+    ajax: {
+      url(par) {
+        return `https://vl-taxi.ru/cities?city=${par.term}&second=&raw=1`;
+      },
+      dataType: 'json',
+      delay: 250,
+      processResults: function (data, params) {
+        return {
+          results: data.cities,
+          id: data.cities.id,
+        };
+      },
+      cache: true,
+    },
+    minimumInputLength: 1,
+    templateResult: cityTemplate,
+    tags: 'true',
+    language: 'ru',
+  });
+
+  const whereCityWrap = jQuery('[data-type="city-where"]');
+  const whereCity = jQuery("[data-type='city-where'] select").select2({
+    ajax: {
+      url(par) {
+        return `https://vl-taxi.ru/cities?city=${par.term}&second=&raw=1`;
+      },
+      dataType: 'json',
+      delay: 250,
+      processResults: function (data, params) {
+        return {
+          results: data.cities,
+          id: data.cities.id,
+        };
+      },
+      cache: true,
+    },
+    minimumInputLength: 1,
+    templateResult: cityTemplate,
+    tags: 'true',
+    language: 'ru',
+  });
+
+  function cityTemplate(city) {
+    if (city.loading) {
+      return 'Подождите...';
+    }
+    return jQuery('<div data-id=' + city.id + '>' + city.text + '</div>');
+  }
+
+  // Setting id for select
+  fromCity.on('change', function (e) {
+    if (typeof jQuery(this).select2('data')[0] === 'undefined') {
+      return true;
+    } else {
+      fromCityWrap.attr({ 'city-id': Number(jQuery(this).select2('data')[0].id) });
+    }
+  });
+  whereCity.on('change', function (e) {
+    if (typeof jQuery(this).select2('data')[0] === 'undefined') {
+      return true;
+    } else {
+      whereCityWrap.attr({ 'city-id': Number(jQuery(this).select2('data')[0].id) });
+    }
+  });
+  typeSelect.on('change', function (e) {
+    let formTariff = document
+      .querySelector('[data-type="type-select"] .select2-selection__rendered')
+      .textContent.toLowerCase();
+    let tariffId =
+      formTariff === 'cтандарт'
+        ? 3
+        : formTariff === 'комфорт'
+        ? 4
+        : formTariff === 'минивэн'
+        ? 6
+        : formTariff === 'бизнес'
+        ? 7
+        : false;
+    typeSelectWrap.attr({ 'type-id': tariffId });
   });
 
   // Datepicker
   jQuery.datetimepicker.setLocale('ru');
   jQuery('#date').datetimepicker({
-    format: 'd.m.Y',
+    format: 'd.m.Y H:i',
+    minDate: '0',
+    minTime: '0',
   });
 
-  // Order btn
-  const orderBtn = document.querySelector('[data-type="order-btn"]');
-  orderBtn.addEventListener('click', (e) => {
+  // Forms
+  // Big form
+  const orderForm = document.querySelector('[data-type="form"]');
+  orderForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    document.body.append(div);
-    scrollWidth = div.offsetWidth - div.clientWidth;
-    div.remove();
-    document.body.style.marginRight = `${scrollWidth}px`;
-    document.body.style.overflow = 'hidden';
-    successModal.classList.add('opened-modal');
+
+    const formData = {
+      name: orderForm.querySelector('input[name="name"]').value,
+      phone: orderForm.querySelector('input[name="phone"]').value,
+      placeFromId: fromCityWrap.attr('city-id'),
+      placeToId: whereCityWrap.attr('city-id'),
+      tariffId: typeSelectWrap.attr('type-id'),
+      dateAt: orderForm.querySelector('input[name="date"]').value,
+      partnerId: '12345',
+    };
+    if (
+      !orderForm.querySelector('input[name="name"]').value ||
+      !orderForm.querySelector('input[name="phone"]').value ||
+      !fromCityWrap.attr('city-id') ||
+      !whereCityWrap.attr('city-id') ||
+      !typeSelectWrap.attr('type-id') ||
+      !orderForm.querySelector('input[name="date"]').value
+    ) {
+      alert('Заполните все обязательные поля');
+    } else {
+      jQuery.ajax({
+        type: 'POST',
+        url: 'https://vl-taxi.ru/handlers/newOrder',
+        data: formData,
+        error: function (req, textStatus, err) {
+          console.error(err);
+          alert('При обработки формы произошла ошибка. Попробуйте еще раз!');
+        },
+        success: function () {
+          successModal.classList.add('opened-modal');
+          fromCity.val(null).trigger('change');
+          whereCity.val(null).trigger('change');
+          typeSelect.val('Выберите класс такси').trigger('change');
+          orderForm.reset();
+          setTimeout(() => {
+            successModal.classList.remove('opened-modal');
+          }, 5000);
+        },
+      });
+    }
   });
+
+  // Small form
+  const callForms = document.querySelectorAll('[data-type="form-call"]');
+
+  callForms.forEach((form) => {
+    let formName = null;
+    let formPhone = null;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      formName = form.querySelector('input[name="name"]');
+      formPhone = form.querySelector('input[name="phone"]');
+
+      const formData = {
+        name: formName.value,
+        phone: formPhone.value,
+      };
+
+      if (!formName.value || !formPhone.value) {
+        alert('Заполните все обязательные поля');
+      } else {
+        jQuery.ajax({
+          type: 'POST',
+          url: 'https://vl-taxi.ru/handlers/newOrder',
+          data: formData,
+          error: function (req, textStatus, err) {
+            console.error(err);
+            alert('При обработки формы произошла ошибка. Попробуйте еще раз!');
+          },
+          success: function () {
+            defaultModal.classList.remove('opened-modal');
+            successModal.classList.add('opened-modal');
+            form.reset();
+            setTimeout(() => {
+              successModal.classList.remove('opened-modal');
+            }, 5000);
+          },
+        });
+      }
+    });
+  });
+});
+
+// Message translations select 2
+jQuery.fn.select2.amd.define('select2/i18n/ru', [], function () {
+  return {
+    errorLoading: function () {
+      return 'Результат не может быть загружен.';
+    },
+    inputTooLong: function (args) {
+      var overChars = args.input.length - args.maximum;
+      var message = 'Пожалуйста, удалите ' + overChars + ' символ';
+      if (overChars >= 2 && overChars <= 4) {
+        message += 'а';
+      } else if (overChars >= 5) {
+        message += 'ов';
+      }
+      return message;
+    },
+    inputTooShort: function (args) {
+      var remainingChars = args.minimum - args.input.length;
+
+      var message = 'Пожалуйста, введите ' + remainingChars + ' или более символов';
+
+      return message;
+    },
+    loadingMore: function () {
+      return 'Загружаем ещё ресурсы…';
+    },
+    maximumSelected: function (args) {
+      var message = 'Вы можете выбрать ' + args.maximum + ' элемент';
+
+      if (args.maximum >= 2 && args.maximum <= 4) {
+        message += 'а';
+      } else if (args.maximum >= 5) {
+        message += 'ов';
+      }
+
+      return message;
+    },
+    noResults: function () {
+      return 'Ничего не найдено';
+    },
+    searching: function () {
+      return 'Поиск…';
+    },
+  };
 });
