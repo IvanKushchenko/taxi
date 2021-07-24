@@ -8,6 +8,12 @@ import 'jquery-datetimepicker/build/jquery.datetimepicker.min.css';
 const select = require('select2');
 import 'select2/dist/css/select2.min.css';
 
+jQuery(document).on("select2:open", () => {
+	setTimeout(() => {
+	    document.querySelector(".select2-container--open .select2-search__field").focus()
+	}, 0)
+})
+
 import Inputmask from 'inputmask';
 
 import OverlayScrollbars from 'overlayscrollbars';
@@ -219,6 +225,8 @@ window.addEventListener('DOMContentLoaded', () => {
         ? 3
         : formTariff === 'комфорт'
         ? 4
+        : formTariff === 'универсал'
+        ? 5
         : formTariff === 'минивэн'
         ? 6
         : formTariff === 'бизнес'
@@ -239,6 +247,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // Big form
   const orderForm = document.querySelector('[data-type="form"]');
   orderForm.addEventListener('submit', (e) => {
+  	console.log(typeSelectWrap.attr('type-id'));
     e.preventDefault();
 
     const formData = {

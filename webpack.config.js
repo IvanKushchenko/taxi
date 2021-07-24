@@ -122,6 +122,7 @@ const config = {
     contentBase: path.join(__dirname, 'src'),
     compress: true,
     port: 3000,
+    host: '0.0.0.0',
     open: true,
   },
 };
