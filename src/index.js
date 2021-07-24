@@ -257,7 +257,7 @@ window.addEventListener('DOMContentLoaded', () => {
       placeToId: whereCityWrap.attr('city-id'),
       tariffId: typeSelectWrap.attr('type-id'),
       dateAt: orderForm.querySelector('input[name="date"]').value,
-      partnerId: '12345',
+      partnerId: '18968',
     };
     if (
       !orderForm.querySelector('input[name="name"]').value ||
