@@ -240,7 +240,8 @@ window.addEventListener('DOMContentLoaded', () => {
   jQuery('#date').datetimepicker({
     format: 'd.m.Y H:i',
     minDate: '0',
-    minTime: '0',
+    minTime: '0', 
+    step: 15,
   });
 
   // Forms
